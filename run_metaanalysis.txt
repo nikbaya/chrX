@@ -1,0 +1,296 @@
+# Miscellaneous
+
+# generic METAL Meta-analysis script
+
+# cd /# Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/
+#
+# /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metal
+#
+# OUTFILE `phenotype`.metawithhet. .tsv
+#
+# MARKER   SNP
+# WEIGHT   N
+# ALLELE   EFFECT_ALLELE NON_EFFECT_ALLELE
+# FREQ     EFFECT_ALLELE_FREQ
+# EFFECT   BETA
+# STDERR   SE
+# PVAL     P_VAL
+#
+# PROCESS `phenotype`.chrX.male.tsv
+# PROCESS `phenotype`.chrX.female.tsv
+#
+# ANALYZE HETEROGENEITY
+#
+# QUIT
+
+# ------------------------------------------------------------------------
+# Miscellaneous
+
+
+# for i in $(ls ~/Documents/lab/ukbb-sexdiff/chrX/data/ | awk -F\. '{print $1}' | uniq); do
+# echo item: $i;
+# # python ~/Desktop/temp.py $i
+# # Rscript ~/Desktop/temp.R ${i}
+# done
+#
+# for i in $(ls ~/Documents/lab/ukbb-sexdiff/chrX/data/ | awk -F\. '{print $1}' | uniq); do
+# foo $i &
+# done
+#
+#
+# for i in $((cd ~/Documents/lab/ukbb-sexdiff/chrX/data && ls *.gz) | awk -F\. '{print $1}' | uniq); do
+# foo $i &
+#
+# done
+
+# ------------------------------------------------------------------------
+# Miscellaneous
+
+(cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls -tr *sexdiff.gz ) | head -4 | awk -F\. '{print $1}' | uniq
+
+[ cd (~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq | head -8 | wc -l = 8]
+
+for i in $((cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq | head 8)); do 
+foo $i &
+
+done
+
+
+
+# ------------------------------------------------------------------------
+# Miscellaneous
+
+# sed -i -e 's/XYZ/XYZ/g' ~/Desktop/temp.sh
+
+# sed 's/phenotype/${i}/g' </Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/METAL_generic.sh >/Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/METAL_temp.sh
+
+# /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metal /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/METAL_temp.sh
+
+VARIABLE="1"
+while [[ "$VARIABLE" -lt "10" && "$VARIABLE" -lt "5" ]] ; do
+	VARIABLE=$[ $VARIABLE  + 1 ]
+	echo $VARIABLE
+	sleep 1
+done
+
+
+VARIABLE="1"
+while [[ "$( (cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq | head -8 | wc -l  )" -eq "8" && "$VARIABLE" -lt "5" ]] ; do
+	VARIABLE=$[ $VARIABLE  + 1 ]
+	echo $VARIABLE
+	sleep 1
+done
+
+
+while [[ "$( (cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq | head -8 | wc -l  )" -gt "0" ]] ; do
+	for i in $( (cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq | head -8 ); do
+		FILENAME=$i
+		mv ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/${i}.sexdiff.gz  ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/donefiles
+		echo $FILENAME;
+	done
+done
+
+
+test="$( (cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq | head -8 | wc -l  )"
+
+mv ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/donefiles/* ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/
+
+
+
+
+sed 's/phenotype/'"$i"'/g' </Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_generic.sh >/Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+
+/Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metal /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+
+
+N=4
+(
+for file in $( (cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq | head -4 ); do 
+   ((i=i%N)); ((i++==0)) && wait
+   task "$thing" & 
+done
+)
+
+N=6 #max number of simultaneous processes
+F=$[ $N*2 ] #total number of files to be processed
+(
+date
+for i in 2664_3 4196 4282 23127 30190; do
+	((a=a%N)); ((a++==0)) && wait
+	foo $i &
+done
+)
+# ------------------------------------------------------------------------
+# Version 1
+
+foo () {
+	
+echo $i
+
+# python ~/Documents/lab/ukbb-sexdiff/chrX/create_chrX_male_female_files.py $i;
+
+# cd /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/metaanalysis_results/
+#
+# sed 's/phenotype/'"$i"'/g' </Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_generic.sh >/Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+#
+# /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metal /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+#
+# # rm /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+#
+# Rscript ~//Documents/lab/ukbb-sexdiff/chrX/plot_metaanalysis.R $i
+
+}
+
+while [[ cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq | ct -8 -eq "8" ]]; do
+
+	for i in $( (cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq); do 
+	foo $i &
+
+	done
+done
+
+
+# ------------------------------------------------------------------------
+# Version 2
+
+foo () {
+	
+echo $i
+
+python ~/Documents/lab/ukbb-sexdiff/chrX/create_chrX_male_female_files.py $i
+
+cd /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/metaanalysis_results/
+
+sed 's/phenotype/'"$i"'/g' </Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_generic.sh >/Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+
+gunzip /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/$i*
+
+/Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metal /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+
+gzip /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/$i*
+
+# rm /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+
+Rscript ~//Documents/lab/ukbb-sexdiff/chrX/plot_metaanalysis.R $i
+
+}
+
+COUNTER=0
+while [[ "$( (cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq | head -8 | wc -l  )" -gt "0" && "$COUNTER" -lt "2" ]] ; do
+	for i in $( (cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq | head -4 ); do
+	mv ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/${i}.sexdiff.gz  ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/donefiles
+	foo $i &
+	done
+	COUNTER=$[ $COUNTER + 1]
+	sleep 1
+done
+
+# ------------------------------------------------------------------------
+# Version 3
+
+foo () {
+	
+echo $1
+
+# mv ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/${i}.sexdiff.gz  ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/donefiles
+#
+# python ~/Documents/lab/ukbb-sexdiff/chrX/create_chrX_male_female_files.py $i
+#
+# cd /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/metaanalysis_results/
+#
+# sed 's/phenotype/'"$i"'/g' </Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_generic.sh >/Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+#
+# gunzip /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/$i*
+#
+# /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metal /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+#
+# gzip /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/$i*
+#
+# # rm /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+#
+# Rscript ~//Documents/lab/ukbb-sexdiff/chrX/plot_metaanalysis.R $i
+
+}
+
+COUNTER=0
+while [[ "$( (cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq | head -4 | wc -l  )" -gt "0" && "$COUNTER" -lt "4" ]] ; do
+	for i in $( (cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls *sexdiff.gz) | awk -F\. '{print $1}' | uniq | head -4 ); do
+	foo $i &
+	done
+	COUNTER=$[ $COUNTER + 1]
+done
+
+
+# ------------------------------------------------------------------------
+# Local Version 3
+
+foo () {
+
+echo $i;
+
+python ~/Documents/lab/ukbb-sexdiff/chrX/create_chrX_male_female_files.py $i
+
+cd /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/metaanalysis_results/
+
+sed 's/phenotype/'"$i"'/g' </Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_generic.sh >/Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+
+gunzip /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/$i*
+
+/Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metal /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+
+gzip /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/$i*
+
+rm /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+
+Rscript ~//Documents/lab/ukbb-sexdiff/chrX/plot_metaanalysis.R $i
+
+mv ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/${i}.sexdiff.gz  ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/donefiles
+
+}
+
+
+N=6 #max number of simultaneous processes
+F=$[ $N*3 ] #total number of files to be processed
+(
+for i in $( (cd ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/ && ls -rt *sexdiff.gz) | awk -F\. '{print $1}' | uniq | head -$F ); do
+	((a=a%N)); ((a++==0)) && wait
+	foo $i &
+done
+)
+	
+# ------------------------------------------------------------------------
+# UGER version (see metaanalysis_UGER.txt)
+
+foo () {
+
+echo $i;
+
+# copy from gcloud
+gsutil -m cp gs://ukbb-gwas-imputed-v3-results/export1/${this_url}.**male**.gz /psych/genetics_data/projects/ukbb_sexdiff/imputed-v3-results/test/
+
+cd /psych/genetics_data/projects/ukbb_sexdiff/imputed-v3-results/test/
+
+paste <(cat ${this_url}.imputed_v3.results.female.tsv.gz | zcat | cut -f 1,2,3,5,6,8)  <(cat ${this_url}.imputed_v3.results.male.tsv.gz | zcat | cut -f 1,2,3,5,6,8) | awk ' NR==1{ print "variant","n_female","n_male","frq_female","frq_male","beta_female","se_female","p_female","beta_male","se_male","p_male" }NR>1 && $1==$7{  maff=$3/(2*$2);  mafm=$9/(2*$8);  if(maff > .05 && maff<.95 && mafm > .05 && mafm < .95){ print $1,$2,$8,maff,mafm,$4,$5,$6,$10,$11,$12} }' | gzip > ${this_url}.sexdiff.gz
+
+# generate chrX files for males and females
+python ~/Documents/lab/ukbb-sexdiff/chrX/create_chrX_male_female_files.py $i
+
+# run meta-analysis
+cd /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/metaanalysis_results/
+
+sed 's/phenotype/'"$i"'/g' </Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_generic.sh >/Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+
+gunzip /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/$i*
+
+/Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metal /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+
+gzip /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/data/$i*
+
+rm /Users/nbaya/Documents/lab/ukbb-sexdiff/chrX/metalcommands/METAL_temp_$i.sh
+
+# create Manhattan plots
+Rscript ~/Documents/lab/ukbb-sexdiff/chrX/plot_metaanalysis.R $i
+
+ # mv ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/${i}.sexdiff.gz  ~/Documents/lab/ukbb-sexdiff/imputed-v3-results/donefiles
+
+}
